@@ -11,9 +11,12 @@
   "scripts": {
     "test": "node --test \"test/**/*.test.mjs\"",
     "test:contract": "node --test test/action-contract.test.mjs test/readme-parity.test.mjs",
-    "regenerate-goldens": "REGENERATE_GOLDENS=yes node test/regenerate-goldens.mjs --write"
+    "regenerate-goldens": "REGENERATE_GOLDENS=yes node test/regenerate-goldens.mjs --write",
+    "check:registry": "node scripts/check-registry-neutrality.mjs",
+    "test:registry": "node --test scripts/check-registry-neutrality.node-test.mjs"
   },
   "devDependencies": {
     "yaml": "^2.8.1"
-  }
+  },
+  "packageManager": "pnpm@12.16.1"
 }
