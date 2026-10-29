@@ -16,11 +16,16 @@ jobs:
       - uses: actions/checkout@v6
         with:
           persist-credentials: false
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v6
         with:
           node-version: "24"
-      - run: npm ci
-      - run: npm test
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run test:registry
+      - run: pnpm run check:registry
+      - run: pnpm test
 
   smoke:
     # The action refuses pull_request events in auto mode, so the smoke job runs on pushes only.
