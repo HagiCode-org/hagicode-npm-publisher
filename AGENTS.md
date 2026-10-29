@@ -17,6 +17,13 @@ Conventions for working in `hagicode-npm-publisher`, the composite GitHub Action
 - The self-check in `assertDevVersion` must stay. A version that fails it must never reach `npm version` or the registry.
 - Golden cases for this rule live in `test/golden/g-prefix/table.json`. Add a row for any new case you find.
 
+## Releasing this action
+
+- `.github/workflows/release-draft.yml` drafts the next `vX.Y.Z` release on every push to `main`, through `HagiCode-org/hagi-release-drafter`. It never publishes. Use Conventional Commits so the bump is right (`feat` is minor, `feat!` or `BREAKING CHANGE:` is major, anything else is patch).
+- Publishing the draft in the GitHub UI creates the tag. `release-tags.yml` then moves the floating major tag (`v1`) that callers reference.
+- The repository has no release tag yet, so the drafter would derive `0.1.0`. Run the workflow once by hand with `version: 1.0.0` to cut the first release.
+- `package.json` stays `private` at `0.1.0`. The release tag is the version; do not bump the manifest.
+
 ## Hard rules
 
 - **No caller names in `scripts/`.** No repository names, package names or caller-specific behaviour. Those reach the action through inputs. `test/action-contract.test.mjs` enforces this.
