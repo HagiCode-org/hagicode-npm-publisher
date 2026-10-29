@@ -1,7 +1,5 @@
 name: HagiCode npm publisher
-description: >-
-  Publish one or more npm packages from the caller's job with npm trusted publishing (OIDC).
-  Stable releases come from a vX.Y.Z release tag; dev publishes come from pushes to a branch.
+description: "Publish npm packages with trusted publishing (OIDC): stable from vX.Y.Z tags, dev builds from branch pushes."
 author: HagiCode-org
 
 inputs:
