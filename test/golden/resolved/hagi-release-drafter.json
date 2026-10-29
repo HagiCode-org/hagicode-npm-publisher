@@ -1,0 +1,54 @@
+{
+  "context": {
+    "run": true,
+    "skipReason": "",
+    "eventName": "push",
+    "eventAction": "",
+    "ref": "refs/heads/main",
+    "mode": "dev",
+    "tag": "",
+    "version": "1.4.2-dev.57.2.ab12cd9",
+    "distTag": "dev",
+    "packageManager": "npm",
+    "defaultInstallCommand": "npm ci",
+    "installCommand": "npm ci",
+    "repository": "HagiCode-org/example",
+    "workflowRef": "HagiCode-org/example/.github/workflows/npm-publish.yml@refs/heads/main",
+    "expectedRepository": "",
+    "expectedWorkflow": ".github/workflows/npm-publish.yml",
+    "workingDirectory": ".",
+    "packages": [
+      {
+        "dir": ".",
+        "name": "@hagicode/example",
+        "version": "1.4.2-dev.57.2.ab12cd9"
+      }
+    ],
+    "provenance": true,
+    "access": "public",
+    "registryUrl": "https://registry.npmjs.org",
+    "dryRun": true,
+    "skipExisting": true,
+    "stampReleaseVersion": false,
+    "packCheck": true,
+    "verifyPackage": true,
+    "verifyLockfileStable": false,
+    "summary": true,
+    "warnings": []
+  },
+  "outputs": {
+    "run": "true",
+    "skip-reason": "",
+    "mode": "dev",
+    "version": "1.4.2-dev.57.2.ab12cd9",
+    "dist-tag": "dev",
+    "package-manager": "npm",
+    "default-install-command": "npm ci",
+    "published": "false",
+    "published-packages": "[]",
+    "skipped-packages": "[]"
+  },
+  "planned": [
+    "@hagicode/example@1.4.2-dev.57.2.ab12cd9"
+  ]
+}

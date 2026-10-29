@@ -1,0 +1,56 @@
+#!/usr/bin/env node
+// Test double for the npm CLI. Logs argv to NPM_SHIM_LOG and replays NPM_SHIM_SCENARIO (JSON).
+import fs from 'node:fs';
+import path from 'node:path';
+
+const args = process.argv.slice(2);
+const scenario = process.env.NPM_SHIM_SCENARIO ? JSON.parse(fs.readFileSync(process.env.NPM_SHIM_SCENARIO, 'utf8')) : {};
+if (process.env.NPM_SHIM_LOG) {
+  fs.appendFileSync(process.env.NPM_SHIM_LOG, `${JSON.stringify({ args, cwd: process.cwd() })}\n`);
+}
+
+function walk(dir, base = dir) {
+  const out = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (entry.name === 'node_modules') continue;
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) out.push(...walk(full, base));
+    else out.push(path.relative(base, full).split(path.sep).join('/'));
+  }
+  return out;
+}
+
+const [command, ...rest] = args;
+if (command === '--version') {
+  process.stdout.write(`${scenario.version ?? '11.6.2'}\n`);
+} else if (command === 'view' && rest[1] === 'dist-tags') {
+  const tags = scenario.distTags?.[rest[0]];
+  if (!tags) {
+    process.stderr.write(`npm error code E404\nnpm error 404 ${rest[0]}\n`);
+    process.exit(1);
+  }
+  process.stdout.write(`${JSON.stringify(tags)}\n`);
+} else if (command === 'view') {
+  const name = rest[0];
+  const entry = scenario.view?.[name] ?? {};
+  if (entry.status) {
+    process.stderr.write(`npm error code ${entry.status}\nnpm error ${entry.status} ${name}\n`);
+    process.exit(1);
+  }
+  process.stdout.write(`${JSON.stringify(entry.versions ?? [])}\n`);
+} else if (command === 'pack') {
+  const files = walk(process.cwd());
+  process.stdout.write(`${JSON.stringify([{ files: files.map((p) => ({ path: p })) }])}\n`);
+} else if (command === 'publish') {
+  const manifest = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8'));
+  const id = `${manifest.name}@${manifest.version}`;
+  const outcome = scenario.publish?.[manifest.name];
+  if (outcome?.exit) {
+    process.stderr.write(outcome.stderr ?? '');
+    process.exit(outcome.exit);
+  }
+  process.stdout.write(`+ ${id}\n`);
+} else {
+  process.stderr.write(`npm shim: unsupported command ${command}\n`);
+  process.exit(2);
+}

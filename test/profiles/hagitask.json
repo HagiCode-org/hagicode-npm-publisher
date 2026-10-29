@@ -1,0 +1,9 @@
+{
+  "description": "hagitask: minimal caller with only mode and a dry run; everything else is the action default.",
+  "fixture": "single",
+  "event": "push-main",
+  "eventName": "push",
+  "ref": "refs/heads/main",
+  "refName": "main",
+  "inputs": { "mode": "dev" }
+}

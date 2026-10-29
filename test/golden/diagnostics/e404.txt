@@ -1,0 +1,3 @@
+npm publish failed for @hagicode/example (class E404).
+- Confirm that the npm scope "@hagicode" exists and that the publishing identity can create or update "@hagicode/example".
+- Confirm that the trusted publisher for "@hagicode/example" on npmjs.com must name owner/repository "HagiCode-org/example", workflow filename ".github/workflows/npm-publish.yml" and the environment (if one is used).

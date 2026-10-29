@@ -1,0 +1,78 @@
+{
+  "context": {
+    "run": true,
+    "skipReason": "",
+    "eventName": "push",
+    "eventAction": "",
+    "ref": "refs/heads/main",
+    "mode": "dev",
+    "tag": "",
+    "version": "0.6.1-dev.57.2.ab12cd9",
+    "distTag": "dev",
+    "packageManager": "pnpm",
+    "defaultInstallCommand": "pnpm install --frozen-lockfile",
+    "installCommand": "pnpm install --frozen-lockfile",
+    "repository": "HagiCode-org/example",
+    "workflowRef": "HagiCode-org/example/.github/workflows/npm-publish.yml@refs/heads/main",
+    "expectedRepository": "HagiCode-org/example",
+    "expectedWorkflow": ".github/workflows/npm-publish.yml",
+    "workingDirectory": ".",
+    "packages": [
+      {
+        "dir": "core",
+        "name": "@hagicode/fixture-core",
+        "version": "0.6.1-dev.57.2.ab12cd9"
+      },
+      {
+        "dir": "standalone",
+        "name": "@hagicode/fixture-standalone",
+        "version": "0.6.1-dev.57.2.ab12cd9"
+      },
+      {
+        "dir": "feature-a",
+        "name": "@hagicode/fixture-feature-a",
+        "version": "0.6.1-dev.57.2.ab12cd9"
+      },
+      {
+        "dir": "feature-b",
+        "name": "@hagicode/fixture-feature-b",
+        "version": "0.6.1-dev.57.2.ab12cd9"
+      },
+      {
+        "dir": "feature-c",
+        "name": "@hagicode/fixture-feature-c",
+        "version": "0.6.1-dev.57.2.ab12cd9"
+      }
+    ],
+    "provenance": true,
+    "access": "public",
+    "registryUrl": "https://registry.npmjs.org",
+    "dryRun": true,
+    "skipExisting": true,
+    "stampReleaseVersion": false,
+    "packCheck": true,
+    "verifyPackage": true,
+    "verifyLockfileStable": true,
+    "summary": true,
+    "warnings": []
+  },
+  "outputs": {
+    "run": "true",
+    "skip-reason": "",
+    "mode": "dev",
+    "version": "0.6.1-dev.57.2.ab12cd9",
+    "dist-tag": "dev",
+    "package-manager": "pnpm",
+    "default-install-command": "pnpm install --frozen-lockfile",
+    "published": "false",
+    "published-packages": "[]",
+    "skipped-packages": "[]"
+  },
+  "planned": [
+    "@hagicode/fixture-core@0.6.1-dev.57.2.ab12cd9",
+    "@hagicode/fixture-standalone@0.6.1-dev.57.2.ab12cd9",
+    "@hagicode/fixture-feature-a@0.6.1-dev.57.2.ab12cd9",
+    "@hagicode/fixture-feature-b@0.6.1-dev.57.2.ab12cd9",
+    "@hagicode/fixture-feature-c@0.6.1-dev.57.2.ab12cd9"
+  ]
+}

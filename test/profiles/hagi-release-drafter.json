@@ -1,0 +1,9 @@
+{
+  "description": "hagi-release-drafter: dev mode with build-command (its build runs via prepack), no lockfile-stability gate, npm publish.",
+  "fixture": "single",
+  "event": "push-main",
+  "eventName": "push",
+  "ref": "refs/heads/main",
+  "refName": "main",
+  "inputs": { "mode": "dev", "package-manager": "npm", "build-command": "npm run build", "verify-lockfile-stable": "false", "typecheck-command": "npm run typecheck" }
+}

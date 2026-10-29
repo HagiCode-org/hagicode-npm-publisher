@@ -1,0 +1,14 @@
+{
+  "description": "hagilight: five packages in dependency order, expected-repository pin, pnpm, verify-command for the graph assertion, skip-existing on.",
+  "fixture": "linked",
+  "event": "push-main",
+  "eventName": "push",
+  "ref": "refs/heads/main",
+  "refName": "main",
+  "inputs": {
+    "packages": "core\nstandalone\nfeature-a\nfeature-b\nfeature-c",
+    "expected-repository": "HagiCode-org/example",
+    "package-manager": "pnpm",
+    "verify-command": "node scripts/assert-package-graph.mjs"
+  }
+}

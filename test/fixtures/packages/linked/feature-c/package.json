@@ -1,0 +1,9 @@
+{
+  "name": "@hagicode/fixture-feature-c",
+  "version": "0.6.1",
+  "license": "MIT",
+  "main": "index.js",
+  "files": ["index.js"],
+  "repository": { "type": "git", "url": "git+https://github.com/HagiCode-org/example.git" },
+  "dependencies": { "@hagicode/fixture-core": "^0.6.0" }
+}

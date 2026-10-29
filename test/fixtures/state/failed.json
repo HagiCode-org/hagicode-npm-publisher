@@ -1,0 +1,23 @@
+{
+  "context": { "run": true, "mode": "dev", "version": "0.6.1-dev.57.2.ab12cd9", "distTag": "dev", "packageManager": "pnpm", "dryRun": false, "warnings": [] },
+  "publish": {
+    "published": ["@hagicode/fixture-core@0.6.1-dev.57.2.ab12cd9", "@hagicode/fixture-standalone@0.6.1-dev.57.2.ab12cd9"],
+    "skipped": [],
+    "notAttempted": ["@hagicode/fixture-feature-b@0.6.1-dev.57.2.ab12cd9", "@hagicode/fixture-feature-c@0.6.1-dev.57.2.ab12cd9"],
+    "failure": {
+      "name": "@hagicode/fixture-feature-a", "version": "0.6.1-dev.57.2.ab12cd9", "distTag": "dev", "class": "E404", "exitCode": 1,
+      "guidance": [
+        "Confirm that the npm scope \"@hagicode\" exists and that the publishing identity can create or update \"@hagicode/fixture-feature-a\".",
+        "Confirm that the trusted publisher for \"@hagicode/fixture-feature-a\" on npmjs.com must name owner/repository \"HagiCode-org/example\", workflow filename \".github/workflows/npm-publish.yml\" and the environment (if one is used)."
+      ]
+    }
+  },
+  "stamp": { "stamped": true, "warnings": ["@hagicode/fixture-feature-c dependencies.@hagicode/fixture-core is \"^0.6.0\" and was left unchanged; only an exact pin (0.6.1) is rewritten"] },
+  "steps": {
+    "context": { "outcome": "success" }, "pnpm": { "outcome": "success" }, "node": { "outcome": "success" },
+    "install": { "outcome": "success" }, "lockfile": { "outcome": "success" }, "stamp": { "outcome": "success" },
+    "hook": { "outcome": "skipped" }, "typecheck": { "outcome": "skipped" }, "build": { "outcome": "skipped" },
+    "test": { "outcome": "success" }, "neutrality": { "outcome": "skipped" }, "verify-packages": { "outcome": "success" },
+    "verify-command": { "outcome": "skipped" }, "publish": { "outcome": "failure" }
+  }
+}

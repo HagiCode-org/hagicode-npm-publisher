@@ -1,0 +1,12 @@
+{
+  "context": { "run": true, "mode": "dev", "version": "0.6.1-dev.57.2.ab12cd9", "distTag": "dev", "packageManager": "npm", "dryRun": false, "warnings": [] },
+  "publish": { "published": ["@hagicode/fixture-core@0.6.1-dev.57.2.ab12cd9", "@hagicode/fixture-standalone@0.6.1-dev.57.2.ab12cd9"], "skipped": [], "notAttempted": [], "failure": null },
+  "stamp": { "stamped": true, "warnings": [] },
+  "steps": {
+    "context": { "outcome": "success" }, "pnpm": { "outcome": "skipped" }, "node": { "outcome": "success" },
+    "install": { "outcome": "success" }, "lockfile": { "outcome": "success" }, "stamp": { "outcome": "success" },
+    "hook": { "outcome": "skipped" }, "typecheck": { "outcome": "skipped" }, "build": { "outcome": "skipped" },
+    "test": { "outcome": "success" }, "neutrality": { "outcome": "skipped" }, "verify-packages": { "outcome": "success" },
+    "verify-command": { "outcome": "skipped" }, "publish": { "outcome": "success" }
+  }
+}

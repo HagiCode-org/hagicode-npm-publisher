@@ -1,0 +1,4 @@
+npm publish failed for @hagicode/example (class unknown).
+- Read the npm output above. Check that "@hagicode/example" has the expected version and access settings.
+- Check that the trusted publisher for "@hagicode/example" on npmjs.com must name owner/repository "HagiCode-org/example", workflow filename ".github/workflows/npm-publish.yml" and the environment (if one is used).
+- The exit status below is the one npm returned.

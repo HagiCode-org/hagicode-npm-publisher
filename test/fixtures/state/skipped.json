@@ -1,0 +1,6 @@
+{
+  "context": { "run": false, "skipReason": "Release v1.4.2 is a prerelease; it is not published by this action.", "mode": "", "version": "", "distTag": "", "packageManager": "", "dryRun": false, "warnings": [] },
+  "publish": {},
+  "stamp": {},
+  "steps": { "context": { "outcome": "success" } }
+}

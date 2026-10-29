@@ -1,0 +1,9 @@
+{
+  "description": "cli: release published (cli has no tag-push trigger), npm not pnpm for publish, typecheck gate, strict tag and manifest agreement.",
+  "fixture": "single",
+  "event": "release-published",
+  "eventName": "release",
+  "ref": "refs/tags/v1.4.2",
+  "refName": "v1.4.2",
+  "inputs": { "package-manager": "npm", "typecheck-command": "npm run typecheck", "build-command": "npm run build", "test-command": "npm test" }
+}

@@ -1,0 +1,9 @@
+{
+  "description": "hagiscript: base-version from the next-tag helper, expected-repository pin, after-version-command for SDK sync.",
+  "fixture": "single",
+  "event": "push-main",
+  "eventName": "push",
+  "ref": "refs/heads/main",
+  "refName": "main",
+  "inputs": { "base-version": "0.4.0", "expected-repository": "HagiCode-org/example", "package-manager": "npm", "after-version-command": "node scripts/sync-sdk-version.mjs" }
+}

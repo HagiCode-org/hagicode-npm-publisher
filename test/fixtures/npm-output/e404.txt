@@ -1,0 +1,4 @@
+npm notice Publishing to https://registry.npmjs.org with tag dev and public access
+npm error code E404
+npm error 404 Not Found - PUT https://registry.npmjs.org/@hagicode%2fexample - Not found
+npm error 404  '@hagicode/example@0.4.0-dev.57.2.ab12cd9' is not in this registry.

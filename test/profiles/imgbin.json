@@ -1,0 +1,10 @@
+{
+  "description": "imgbin: release tag with stamp-release-version (tag then rewrite), provenance on, npm dev and stable paths share one contract.",
+  "fixture": "single",
+  "manifestPatches": { ".": { "version": "1.4.1" } },
+  "event": "release-published",
+  "eventName": "release",
+  "ref": "refs/tags/v1.4.2",
+  "refName": "v1.4.2",
+  "inputs": { "stamp-release-version": "true", "package-manager": "npm", "build-command": "npm run build", "test-command": "npm test" }
+}

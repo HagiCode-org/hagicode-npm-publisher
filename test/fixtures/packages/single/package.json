@@ -1,0 +1,9 @@
+{
+  "name": "@hagicode/example",
+  "version": "1.4.2",
+  "description": "Fixture package for publisher tests",
+  "license": "MIT",
+  "main": "index.js",
+  "files": ["index.js", "README.md"],
+  "repository": { "type": "git", "url": "git+https://github.com/HagiCode-org/example.git" }
+}

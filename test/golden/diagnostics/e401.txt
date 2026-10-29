@@ -1,0 +1,2 @@
+npm publish failed for @hagicode/example (class E401).
+- The job has no OIDC request variables. Grant "id-token: write" at job or workflow level.

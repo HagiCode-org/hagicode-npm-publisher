@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+// Test double for pnpm: records argv and succeeds. The action only calls pnpm from composite steps.
+import fs from 'node:fs';
+if (process.env.NPM_SHIM_LOG) {
+  fs.appendFileSync(process.env.NPM_SHIM_LOG, `${JSON.stringify({ tool: 'pnpm', args: process.argv.slice(2), cwd: process.cwd() })}\n`);
+}
+process.stdout.write('10.0.0\n');

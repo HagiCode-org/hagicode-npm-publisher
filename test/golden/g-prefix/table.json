@@ -1,0 +1,11 @@
+[
+  { "input": "1234567", "expected": "g1234567", "note": "all digits, full length: prefixed" },
+  { "input": "0123456", "expected": "g0123456", "note": "leading zero: prefixed" },
+  { "input": "0000000", "expected": "g0000000", "note": "all zeros: prefixed" },
+  { "input": "12345", "expected": "g12345", "note": "shorter than 7 digits: prefixed after slicing" },
+  { "input": "12345a7", "expected": "12345a7", "note": "contains a letter: unchanged" },
+  { "input": "abcdef0", "expected": "abcdef0", "note": "contains letters: unchanged" },
+  { "input": "AB-12.cd/9f00", "expected": "ab12cd9", "note": "mixed case and punctuation cleaned, then sliced" },
+  { "input": "1234567890", "expected": "g1234567", "note": "longer input: sliced to 7 then prefixed" },
+  { "input": "!!!", "expected": null, "note": "empty after cleaning: must fail" }
+]

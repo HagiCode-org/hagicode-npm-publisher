@@ -1,0 +1,12 @@
+{
+  "context": { "run": true, "mode": "release", "version": "1.4.2", "distTag": "latest", "packageManager": "pnpm", "dryRun": false, "warnings": ["base-version is ignored in release mode; the release tag decides the version"] },
+  "publish": { "published": ["@hagicode/example@1.4.2"], "skipped": [], "notAttempted": [], "failure": null },
+  "stamp": { "stamped": false, "warnings": [] },
+  "steps": {
+    "context": { "outcome": "success" }, "pnpm": { "outcome": "success" }, "node": { "outcome": "success" },
+    "install": { "outcome": "success" }, "lockfile": { "outcome": "success" }, "stamp": { "outcome": "success" },
+    "hook": { "outcome": "skipped" }, "typecheck": { "outcome": "success" }, "build": { "outcome": "success" },
+    "test": { "outcome": "success" }, "neutrality": { "outcome": "skipped" }, "verify-packages": { "outcome": "success" },
+    "verify-command": { "outcome": "skipped" }, "publish": { "outcome": "success" }
+  }
+}

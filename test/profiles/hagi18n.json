@@ -1,0 +1,9 @@
+{
+  "description": "hagi18n: push to main publishes dev without --provenance (no provenance flag in its workflow), frozen npm install, pack check.",
+  "fixture": "single",
+  "event": "push-main",
+  "eventName": "push",
+  "ref": "refs/heads/main",
+  "refName": "main",
+  "inputs": { "package-manager": "npm", "provenance": "false", "pack-check": "true" }
+}

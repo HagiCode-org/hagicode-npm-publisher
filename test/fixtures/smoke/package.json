@@ -1,0 +1,15 @@
+{
+  "name": "@hagicode/publisher-smoke",
+  "version": "0.1.0",
+  "description": "Fixture package for publisher tests",
+  "license": "MIT",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HagiCode-org/hagicode-npm-publisher.git"
+  }
+}

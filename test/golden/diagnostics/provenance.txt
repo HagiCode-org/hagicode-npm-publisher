@@ -1,0 +1,3 @@
+npm publish failed for @hagicode/example (class provenance).
+- Compare repository.url in the package.json of "@hagicode/example" with the GitHub repository "HagiCode-org/example".
+- Confirm that the trusted publisher for "@hagicode/example" on npmjs.com must name owner/repository "HagiCode-org/example", workflow filename ".github/workflows/npm-publish.yml" and the environment (if one is used).

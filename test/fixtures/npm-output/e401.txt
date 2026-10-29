@@ -1,0 +1,4 @@
+npm notice Publishing to https://registry.npmjs.org with tag dev and public access
+npm error code ENEEDAUTH
+npm error need auth This command requires you to be logged in to https://registry.npmjs.org
+npm error need auth You need to authorize this machine using `npm adduser`
