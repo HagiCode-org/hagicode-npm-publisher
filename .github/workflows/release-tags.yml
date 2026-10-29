@@ -1,0 +1,37 @@
+name: Release tags
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  move-major:
+    name: Move the floating major tag
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Decide the floating tag
+        id: floating
+        env:
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          git tag --list 'v*.*.*' > "$RUNNER_TEMP/tags.txt"
+          TAGS_FILE="$RUNNER_TEMP/tags.txt" node scripts/release-tag.mjs | tee -a "$GITHUB_OUTPUT"
+      - name: Move the floating tag
+        if: steps.floating.outputs.major != ''
+        env:
+          MAJOR: ${{ steps.floating.outputs.major }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -f "$MAJOR" "$GITHUB_SHA"
+          git push origin "refs/tags/$MAJOR" --force
