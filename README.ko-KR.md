@@ -194,8 +194,8 @@ npm 신뢰할 수 있는 게시에는 npm CLI 11.5.1 이상과 Node.js 22.14.0 �
 ## 개발
 
 ```sh
-npm install
-npm test
+pnpm install
+pnpm test
 ```
 
-테스트는 샘플 패키지를 대상으로 실제 단계 스크립트를 실행합니다. `npm`과 `pnpm`은 `PATH`에 있는 shim으로 대체되므로, 어떤 테스트도 레지스트리에 접속하지 않습니다. 골든 파일은 `npm run regenerate-goldens`로만 기록할 수 있으며, 이 명령은 보호되어 있습니다.
+테스트는 샘플 패키지를 대상으로 실제 단계 스크립트를 실행합니다. `npm`과 `pnpm`은 `PATH`에 있는 shim으로 대체되므로, 어떤 테스트도 레지스트리에 접속하지 않습니다. 골든 파일은 `pnpm run regenerate-goldens`로만 기록할 수 있으며, 이 명령은 보호되어 있습니다.

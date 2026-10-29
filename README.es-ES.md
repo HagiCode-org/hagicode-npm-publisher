@@ -194,8 +194,8 @@ Las etiquetas `vX.Y.Z` marcan las versiones. Un workflow mueve la etiqueta flota
 ## Desarrollo
 
 ```sh
-npm install
-npm test
+pnpm install
+pnpm test
 ```
 
-Las pruebas ejecutan los scripts de paso reales contra paquetes de prueba. `npm` y `pnpm` se sustituyen por shims en `PATH`, así que ninguna prueba contacta con un registro. Los archivos de referencia (golden) solo se escriben con `npm run regenerate-goldens`, que está protegido.
+Las pruebas ejecutan los scripts de paso reales contra paquetes de prueba. `npm` y `pnpm` se sustituyen por shims en `PATH`, así que ninguna prueba contacta con un registro. Los archivos de referencia (golden) solo se escriben con `pnpm run regenerate-goldens`, que está protegido.

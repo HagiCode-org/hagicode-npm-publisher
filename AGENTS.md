@@ -28,17 +28,17 @@ Conventions for working in `hagicode-npm-publisher`, the composite GitHub Action
 
 - **No caller names in `scripts/`.** No repository names, package names or caller-specific behaviour. Those reach the action through inputs. `test/action-contract.test.mjs` enforces this.
 - **Dry runs never reach the registry or npm publish.** Tests replace `npm` and `pnpm` with shims on `PATH`. No test may contact a real registry.
-- **Golden files are read by tests and written only by `npm run regenerate-goldens`**, which is guarded by `REGENERATE_GOLDENS=yes`. Review every golden diff before committing it.
+- **Golden files are read by tests and written only by `pnpm run regenerate-goldens`**, which is guarded by `REGENERATE_GOLDENS=yes`. Review every golden diff before committing it.
 - Do not add a workflow, script or input that edits a caller repository. Callers are not modified by this repository.
 - Do not state a fact about npm trusted publishing in a README unless it is recorded in `docs/trusted-publishing-notes.md` with its source.
 
 ## Commands
 
 ```sh
-npm install
-npm test                # all unit, contract, golden and profile tests
-npm run test:contract   # action.yml and README parity only
-npm run regenerate-goldens   # refuses to run without REGENERATE_GOLDENS=yes
+pnpm install
+pnpm test                # all unit, contract, golden and profile tests
+pnpm run test:contract   # action.yml and README parity only
+pnpm run regenerate-goldens   # refuses to run without REGENERATE_GOLDENS=yes
 ```
 
 Run the suite with `NODE_OPTIONS=--max-old-space-size=24576` on a shared machine. Tests run children with a scrubbed environment (only the shims, node and the system path), so no live data is visible to them.

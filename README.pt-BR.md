@@ -194,8 +194,8 @@ As tags `vX.Y.Z` marcam releases. Um workflow move a tag flutuante `v1` apenas p
 ## Desenvolvimento
 
 ```sh
-npm install
-npm test
+pnpm install
+pnpm test
 ```
 
-Os testes executam os scripts reais das etapas contra pacotes de fixture. `npm` e `pnpm` são substituídos por shims no `PATH`, então nenhum teste acessa um registry. Os arquivos golden são gravados somente pelo `npm run regenerate-goldens`, que é protegido.
+Os testes executam os scripts reais das etapas contra pacotes de fixture. `npm` e `pnpm` são substituídos por shims no `PATH`, então nenhum teste acessa um registry. Os arquivos golden são gravados somente pelo `pnpm run regenerate-goldens`, que é protegido.

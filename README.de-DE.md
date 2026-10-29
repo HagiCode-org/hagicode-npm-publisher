@@ -194,8 +194,8 @@ Dieses Repository veröffentlicht kein npm-Paket. Die Action ist das Produkt, un
 ## Entwicklung
 
 ```sh
-npm install
-npm test
+pnpm install
+pnpm test
 ```
 
-Tests führen die echten Schritt-Skripte gegen Fixture-Pakete aus. `npm` und `pnpm` werden auf `PATH` durch Shims ersetzt, sodass kein Test eine Registry kontaktiert. Golden-Dateien werden nur durch `npm run regenerate-goldens` geschrieben, das abgesichert ist.
+Tests führen die echten Schritt-Skripte gegen Fixture-Pakete aus. `npm` und `pnpm` werden auf `PATH` durch Shims ersetzt, sodass kein Test eine Registry kontaktiert. Golden-Dateien werden nur durch `pnpm run regenerate-goldens` geschrieben, das abgesichert ist.

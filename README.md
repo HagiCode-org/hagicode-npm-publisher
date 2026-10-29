@@ -194,8 +194,8 @@ This repository publishes no npm package. The action is the product, and the man
 ## Development
 
 ```sh
-npm install
-npm test
+pnpm install
+pnpm test
 ```
 
-Tests run the real step scripts against fixture packages. `npm` and `pnpm` are replaced by shims on `PATH`, so no test contacts a registry. Golden files are written only by `npm run regenerate-goldens`, which is guarded.
+Tests run the real step scripts against fixture packages. `npm` and `pnpm` are replaced by shims on `PATH`, so no test contacts a registry. Golden files are written only by `pnpm run regenerate-goldens`, which is guarded.

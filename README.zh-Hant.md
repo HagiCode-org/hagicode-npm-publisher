@@ -194,8 +194,8 @@ npm 可信發布需要 npm CLI 11.5.1 或更新版本，以及 Node.js 22.14.0 �
 ## 開發
 
 ```sh
-npm install
-npm test
+pnpm install
+pnpm test
 ```
 
-測試會針對範例套件執行真實的步驟腳本。`npm` 與 `pnpm` 會被 `PATH` 上的 shim 取代，因此沒有任何測試會連線到 registry。黃金檔案只能透過 `npm run regenerate-goldens` 寫入，該命令設有保護。
+測試會針對範例套件執行真實的步驟腳本。`npm` 與 `pnpm` 會被 `PATH` 上的 shim 取代，因此沒有任何測試會連線到 registry。黃金檔案只能透過 `pnpm run regenerate-goldens` 寫入，該命令設有保護。
