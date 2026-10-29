@@ -1,0 +1,56 @@
+name: Release draft
+
+# Drafts the next stable vX.Y.Z release from Conventional Commits through the centralized
+# HagiCode-org/hagi-release-drafter action. This workflow never publishes the release.
+# Publishing the draft in the GitHub UI creates the tag, and release-tags.yml then moves the floating major tag.
+#
+# The first release must be dispatched by hand with version 1.0.0: callers reference @v1,
+# and with no release tag yet the drafter would otherwise derive 0.1.0.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Optional stable X.Y.Z to use instead of the version derived from commits
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-draft
+  cancel-in-progress: false
+
+jobs:
+  draft:
+    name: Draft the next release
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          persist-credentials: false
+      - name: Draft release
+        id: draft
+        uses: HagiCode-org/hagi-release-drafter@v0.5.0
+        with:
+          version: ${{ inputs.version }}
+          title-template: "v{version}"
+      - name: Summarize
+        env:
+          VERSION: ${{ steps.draft.outputs.version }}
+          RELEASE_URL: ${{ steps.draft.outputs.release-url }}
+        run: |
+          {
+            echo "### Release draft"
+            echo
+            echo "- Version: \`v${VERSION}\`"
+            echo "- Draft: ${RELEASE_URL}"
+            echo "- Publishing stays manual."
+          } >> "$GITHUB_STEP_SUMMARY"
