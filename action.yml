@@ -1,0 +1,278 @@
+name: HagiCode npm publisher
+description: >-
+  Publish one or more npm packages from the caller's job with npm trusted publishing (OIDC).
+  Stable releases come from a vX.Y.Z release tag; dev publishes come from pushes to a branch.
+author: HagiCode-org
+
+inputs:
+  mode:
+    description: "auto (detect from the event), dev, or release."
+    required: false
+    default: auto
+  package-manager:
+    description: "auto (pnpm when pnpm-lock.yaml exists, else npm), pnpm, or npm."
+    required: false
+    default: auto
+  node-version:
+    description: "Node.js version for the toolchain step."
+    required: false
+    default: "24"
+  working-directory:
+    description: "Directory, relative to the repository root, that holds the packages and lockfile."
+    required: false
+    default: "."
+  packages:
+    description: "Newline-separated package directories, in publish order (dependencies first)."
+    required: false
+    default: "."
+  provenance:
+    description: "Publish with --provenance."
+    required: false
+    default: "true"
+  access:
+    description: "npm access level: public or restricted."
+    required: false
+    default: public
+  dist-tag:
+    description: "Override the dist-tag. dev mode may not use latest; release mode must use latest."
+    required: false
+    default: ""
+  registry-url:
+    description: "npm registry URL."
+    required: false
+    default: https://registry.npmjs.org
+  base-version:
+    description: "X.Y.Z base for dev versions. Defaults to the X.Y.Z of the first package's package.json."
+    required: false
+    default: ""
+  expected-repository:
+    description: "owner/repo the run must come from. Empty means the current repository."
+    required: false
+    default: ""
+  expected-workflow:
+    description: "Workflow file npm trusted publishing is bound to."
+    required: false
+    default: .github/workflows/npm-publish.yml
+  install-command:
+    description: "Install command. auto runs the frozen-lockfile install for the package manager. Empty skips it."
+    required: false
+    default: auto
+  typecheck-command:
+    description: "Typecheck command. Empty skips the gate."
+    required: false
+    default: ""
+  build-command:
+    description: "Build command. Empty skips the gate."
+    required: false
+    default: ""
+  test-command:
+    description: "Test command. Empty skips the gate."
+    required: false
+    default: ""
+  after-version-command:
+    description: "Runs after version stamping, with PUBLISH_VERSION, PUBLISH_DIST_TAG and PUBLISH_MODE set."
+    required: false
+    default: ""
+  registry-neutrality-command:
+    description: "Caller-owned registry-neutrality check, run after tests and before pack checks."
+    required: false
+    default: ""
+  verify-command:
+    description: "Caller-owned verification (for example a package-graph assertion), run before publish."
+    required: false
+    default: ""
+  pack-check:
+    description: "Run npm pack --dry-run --json for each package and reject leaked files."
+    required: false
+    default: "true"
+  verify-package:
+    description: "Run the generic manifest rules (entry points exist, provenance repository.url)."
+    required: false
+    default: "true"
+  verify-lockfile-stable:
+    description: "Fail if the install changed the lockfile (git diff against the index)."
+    required: false
+    default: "true"
+  skip-existing:
+    description: "Skip a package whose resolved version is already in the registry."
+    required: false
+    default: "true"
+  summary:
+    description: "Write the job summary."
+    required: false
+    default: "true"
+  stamp-release-version:
+    description: "Rewrite package.json from a stable tag (legacy imgbin behaviour) instead of verifying it."
+    required: false
+    default: "false"
+  dry-run:
+    description: "Run every gate up to package verification, but never call npm publish."
+    required: false
+    default: "false"
+
+outputs:
+  version:
+    description: "The resolved version (dev or stable)."
+    value: ${{ steps.summarize.outputs.version }}
+  dist-tag:
+    description: "The dist-tag used (dev or latest, unless overridden)."
+    value: ${{ steps.summarize.outputs.dist-tag }}
+  mode:
+    description: "The resolved mode: dev or release."
+    value: ${{ steps.summarize.outputs.mode }}
+  published:
+    description: "true when at least one package was published."
+    value: ${{ steps.summarize.outputs.published }}
+  published-packages:
+    description: "JSON array of name@version that were published."
+    value: ${{ steps.summarize.outputs.published-packages }}
+  skipped-packages:
+    description: "JSON array of name@version skipped because the registry already had them."
+    value: ${{ steps.summarize.outputs.skipped-packages }}
+  package-manager:
+    description: "The package manager used: pnpm or npm."
+    value: ${{ steps.summarize.outputs.package-manager }}
+
+runs:
+  using: composite
+  steps:
+    - id: context
+      name: Resolve publish context
+      shell: bash
+      env:
+        INPUT_MODE: ${{ inputs.mode }}
+        INPUT_PACKAGE-MANAGER: ${{ inputs.package-manager }}
+        INPUT_NODE-VERSION: ${{ inputs.node-version }}
+        INPUT_WORKING-DIRECTORY: ${{ inputs.working-directory }}
+        INPUT_PACKAGES: ${{ inputs.packages }}
+        INPUT_PROVENANCE: ${{ inputs.provenance }}
+        INPUT_ACCESS: ${{ inputs.access }}
+        INPUT_DIST-TAG: ${{ inputs.dist-tag }}
+        INPUT_REGISTRY-URL: ${{ inputs.registry-url }}
+        INPUT_BASE-VERSION: ${{ inputs.base-version }}
+        INPUT_EXPECTED-REPOSITORY: ${{ inputs.expected-repository }}
+        INPUT_EXPECTED-WORKFLOW: ${{ inputs.expected-workflow }}
+        INPUT_INSTALL-COMMAND: ${{ inputs.install-command }}
+        INPUT_TYPECHECK-COMMAND: ${{ inputs.typecheck-command }}
+        INPUT_BUILD-COMMAND: ${{ inputs.build-command }}
+        INPUT_TEST-COMMAND: ${{ inputs.test-command }}
+        INPUT_AFTER-VERSION-COMMAND: ${{ inputs.after-version-command }}
+        INPUT_REGISTRY-NEUTRALITY-COMMAND: ${{ inputs.registry-neutrality-command }}
+        INPUT_VERIFY-COMMAND: ${{ inputs.verify-command }}
+        INPUT_PACK-CHECK: ${{ inputs.pack-check }}
+        INPUT_VERIFY-PACKAGE: ${{ inputs.verify-package }}
+        INPUT_VERIFY-LOCKFILE-STABLE: ${{ inputs.verify-lockfile-stable }}
+        INPUT_SKIP-EXISTING: ${{ inputs.skip-existing }}
+        INPUT_SUMMARY: ${{ inputs.summary }}
+        INPUT_STAMP-RELEASE-VERSION: ${{ inputs.stamp-release-version }}
+        INPUT_DRY-RUN: ${{ inputs.dry-run }}
+        PUBLISH_STATE_DIR: ${{ runner.temp }}/hagicode-npm-publisher
+      run: node "${{ github.action_path }}/scripts/resolve-context.mjs"
+
+    - id: pnpm
+      name: Set up pnpm
+      if: ${{ success() && steps.context.outputs.run == 'true' && steps.context.outputs.package-manager == 'pnpm' }}
+      uses: pnpm/action-setup@v4
+
+    - id: node
+      name: Set up Node.js
+      if: ${{ success() && steps.context.outputs.run == 'true' }}
+      uses: actions/setup-node@v6
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - id: install
+      name: Install dependencies
+      if: ${{ success() && steps.context.outputs.run == 'true' && inputs.install-command != '' }}
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: ${{ inputs.install-command == 'auto' && steps.context.outputs.default-install-command || inputs.install-command }}
+
+    - id: lockfile
+      name: Lockfile stability
+      if: ${{ success() && steps.context.outputs.run == 'true' && inputs.verify-lockfile-stable == 'true' }}
+      shell: bash
+      env:
+        PUBLISH_STATE_DIR: ${{ runner.temp }}/hagicode-npm-publisher
+      run: node "${{ github.action_path }}/scripts/verify-lockfile.mjs"
+
+    - id: stamp
+      name: Stamp versions
+      if: ${{ success() && steps.context.outputs.run == 'true' }}
+      shell: bash
+      env:
+        PUBLISH_STATE_DIR: ${{ runner.temp }}/hagicode-npm-publisher
+      run: node "${{ github.action_path }}/scripts/stamp-versions.mjs"
+
+    - id: hook
+      name: after-version-command
+      if: ${{ success() && steps.context.outputs.run == 'true' && inputs.after-version-command != '' }}
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      env:
+        PUBLISH_VERSION: ${{ steps.context.outputs.version }}
+        PUBLISH_DIST_TAG: ${{ steps.context.outputs.dist-tag }}
+        PUBLISH_MODE: ${{ steps.context.outputs.mode }}
+      run: ${{ inputs.after-version-command }}
+
+    - id: typecheck
+      name: Typecheck
+      if: ${{ success() && steps.context.outputs.run == 'true' && inputs.typecheck-command != '' }}
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: ${{ inputs.typecheck-command }}
+
+    - id: build
+      name: Build
+      if: ${{ success() && steps.context.outputs.run == 'true' && inputs.build-command != '' }}
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: ${{ inputs.build-command }}
+
+    - id: test
+      name: Test
+      if: ${{ success() && steps.context.outputs.run == 'true' && inputs.test-command != '' }}
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: ${{ inputs.test-command }}
+
+    - id: neutrality
+      name: Registry-neutrality command
+      if: ${{ success() && steps.context.outputs.run == 'true' && inputs.registry-neutrality-command != '' }}
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: ${{ inputs.registry-neutrality-command }}
+
+    - id: verify-packages
+      name: Pack check and package verification
+      if: ${{ success() && steps.context.outputs.run == 'true' }}
+      shell: bash
+      env:
+        PUBLISH_STATE_DIR: ${{ runner.temp }}/hagicode-npm-publisher
+      run: node "${{ github.action_path }}/scripts/verify-packages.mjs"
+
+    - id: verify-command
+      name: verify-command
+      if: ${{ success() && steps.context.outputs.run == 'true' && inputs.verify-command != '' }}
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: ${{ inputs.verify-command }}
+
+    - id: publish
+      name: Publish
+      if: ${{ success() && steps.context.outputs.run == 'true' }}
+      shell: bash
+      env:
+        INPUT_DRY-RUN: ${{ inputs.dry-run }}
+        PUBLISH_STATE_DIR: ${{ runner.temp }}/hagicode-npm-publisher
+      run: node "${{ github.action_path }}/scripts/publish.mjs"
+
+    - id: summarize
+      name: Outputs and job summary
+      if: ${{ always() }}
+      shell: bash
+      env:
+        INPUT_SUMMARY: ${{ inputs.summary }}
+        STEPS_JSON: ${{ toJSON(steps) }}
+        PUBLISH_STATE_DIR: ${{ runner.temp }}/hagicode-npm-publisher
+      run: node "${{ github.action_path }}/scripts/summarize.mjs"

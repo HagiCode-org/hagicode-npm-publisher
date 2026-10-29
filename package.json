@@ -1,0 +1,19 @@
+{
+  "name": "hagicode-npm-publisher",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Composite GitHub Action that publishes HagiCode npm packages with npm trusted publishing.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "license": "UNLICENSED",
+  "scripts": {
+    "test": "node --test \"test/**/*.test.mjs\"",
+    "test:contract": "node --test test/action-contract.test.mjs test/readme-parity.test.mjs",
+    "regenerate-goldens": "REGENERATE_GOLDENS=yes node test/regenerate-goldens.mjs --write"
+  },
+  "devDependencies": {
+    "yaml": "^2.8.1"
+  }
+}

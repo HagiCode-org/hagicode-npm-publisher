@@ -1,0 +1,6 @@
+node_modules/
+coverage/
+.tmp/
+*.log
+# Build output is never committed: the action runs plain .mjs files.
+dist/
