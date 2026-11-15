@@ -4,3 +4,6 @@ coverage/
 *.log
 # Build output is never committed: the action runs plain .mjs files.
 dist/
+
+# Local deja session-rule export (auto-extracted from agent sessions; not committed)
+.deja/
