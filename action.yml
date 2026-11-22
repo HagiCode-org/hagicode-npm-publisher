@@ -100,7 +100,7 @@ inputs:
     required: false
     default: "true"
   stamp-release-version:
-    description: "Rewrite package.json from a stable tag (legacy imgbin behaviour) instead of verifying it."
+    description: "Rewrite package.json from a stable tag instead of verifying it."
     required: false
     default: "false"
   dry-run:
