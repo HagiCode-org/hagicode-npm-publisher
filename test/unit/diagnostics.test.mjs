@@ -43,7 +43,7 @@ test('diagnostics name the runtime package, repository and workflow, never a fix
   assert.match(text, /scope "@acme"/);
   assert.match(text, /Acme\/widgets/);
   assert.match(text, /release\.yml/);
-  assert.doesNotMatch(text, /hagicode|imgbin|HagiCode-org/);
+  assert.doesNotMatch(text, /hagicode|HagiCode-org/);
 });
 
 test('credential values are redacted from printed text', () => {

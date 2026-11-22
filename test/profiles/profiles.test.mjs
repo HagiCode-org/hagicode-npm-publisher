@@ -19,6 +19,6 @@ for (const name of listProfiles()) {
   });
 }
 
-test('the seven existing callers each have a profile', () => {
-  assert.deepEqual(listProfiles(), ['cli', 'hagi-release-drafter', 'hagi18n', 'hagilight', 'hagiscript', 'hagitask', 'imgbin']);
+test('the six existing callers each have a profile', () => {
+  assert.deepEqual(listProfiles(), ['cli', 'hagi-release-drafter', 'hagi18n', 'hagilight', 'hagiscript', 'hagitask']);
 });

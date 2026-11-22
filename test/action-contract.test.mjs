@@ -88,7 +88,7 @@ test('every uses: reference is pinned to a single major', () => {
 });
 
 test('scripts contain no hard-coded caller repository or package names', () => {
-  const forbidden = [/HagiCode-org\//, /@hagicode\//, /\b(imgbin|hagilight|hagiscript|hagi18n|hagitask|hagi-release-drafter)\b/i];
+  const forbidden = [/HagiCode-org\//, /@hagicode\//, /\b(hagilight|hagiscript|hagi18n|hagitask|hagi-release-drafter)\b/i];
   for (const file of scriptFiles(path.join(root, 'scripts'))) {
     const text = fs.readFileSync(file, 'utf8');
     for (const pattern of forbidden) {
